@@ -2,12 +2,24 @@ import React, { Component } from 'react';
 import { Menu, Button, Container, Icon, Input, Divider, Card, Header } from 'semantic-ui-react';
 
 const Static = () => {
-
-
-
 	return(
 		<div>
-			<Menu size='huge' inverted borderless>
+			<InfoHeader />
+    	<Container>
+    		<MetalSelector />
+    	</Container>
+			<Divider />
+			<Container>    		
+				<GoldCardList />
+				<SilverCardList />				
+			</Container>
+		</div>		
+	);
+}
+
+const InfoHeader = () => {
+	return(
+		<Menu size='huge' inverted borderless>
       <Menu.Item>
         Spot $16.49
       </Menu.Item>
@@ -19,19 +31,24 @@ const Static = () => {
       <Menu.Item>
       	0
       </Menu.Item>
-    	</Menu>
-    	<Container>
+    </Menu>
+	);
+}
+
+const MetalSelector = () => {
+	return(
+		<Container>
 			<Button.Group>
 				<Button color='yellow'>Buy Gold</Button>
 				<Button color='gray'>Buy Silver</Button>				  
 			</Button.Group>
-			</Container>
+		</Container>
+	);
+}
 
-			<Divider />
-
-    	<Container>    		
-
-				<Card.Group itemsPerRow={4}>
+const GoldCardList = () => {
+	return (
+		<Card.Group itemsPerRow={4}>
 					<Card 
 						image='https://www.itmtrading.com/content/images/thumbs/0003733_2018-1-oz-american-gold-eagle_360.png'
             header='2018 American Eagle'
@@ -99,8 +116,12 @@ const Static = () => {
 	          }
 					/>
 				</Card.Group>
+	);
+}
 
-				<Card.Group itemsPerRow={4}>
+const SilverCardList = () => {
+	return (
+		<Card.Group itemsPerRow={4}>
 					<Card 
 						image='https://www.itmtrading.com/content/images/thumbs/0003791_2018-1-oz-american-silver-eagle_360.png'
             header='1 oz 2018 American Eagle'
@@ -159,25 +180,19 @@ const Static = () => {
 	          extra={
 	          	<div>
 	          		<h2>Call for Availability</h2>
-		          	<Input 
-		          		fluid 
-		          		action={{color: 'green', content: 'Add to Cart'}} 
-		          		placeholder='0' 
+		          	<Input
+		          		fluid		          		
+		          		action={{color: 'green', content: 'Add to Cart'}}		          		
+		          		type='number' 
+		          		placeholder='0'
+		          		
 		          	/>          	
 	          	</div>
 	          }
 					/>
-				</Card.Group>
-			</Container>
-
-
-		</div>
-
-		
+		</Card.Group>
 	);
 }
-
-
 
 
 
