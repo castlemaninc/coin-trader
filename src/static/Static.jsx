@@ -7,83 +7,90 @@ class Static extends Component {
 		goldSpot: 1334.20,
 		silverSpot: 16.57,		
 		itemsInCart: 0,
-		goldSelected: true,
+		silverSelected: false,
 		percentageChange: 1.3,
 		products: [
 			{
 				name: '2018 American Eagle',
 				meta: '1 oz of Gold',
 				description: '.9167 FINE GOLD',
-				image: 'https://www.itmtrading.com/content/images/thumbs/0003733_2018-1-oz-american-gold-eagle_360.png'
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003733_2018-1-oz-american-gold-eagle_360.png',
+				markup: 1.045				
 			},
 			{
 				name: '2018 American Gold Buffalo',
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
-				image: 'https://www.itmtrading.com/content/images/thumbs/0003799_2018-1-oz-american-gold-buffalo_360.png'
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003799_2018-1-oz-american-gold-buffalo_360.png',
+				markup: 1.056	
 			},
 			{
 				name: '2018 Austrian Gold Philharmonic',
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
-				image: 'https://www.itmtrading.com/content/images/thumbs/0003737_2018-1-oz-austrian-gold-philharmonic_360.jpeg'
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003737_2018-1-oz-austrian-gold-philharmonic_360.jpeg',
+				markup: 1.051	
 			},
 			{
 				name: '2018 Great Britain Gold Brittania',
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
-				image: 'https://www.itmtrading.com/content/images/thumbs/0003749_2018-1-oz-great-britain-gold-britannia_360.png'
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003749_2018-1-oz-great-britain-gold-britannia_360.png',
+				markup: 1.047	
 			},
 			{
 				name: '2018 American Eagle',
 				meta: '1 oz of Silver',
 				description: '.999 FINE SILVER',
-				image: 'https://www.itmtrading.com/content/images/thumbs/0003791_2018-1-oz-american-silver-eagle_360.png'
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003791_2018-1-oz-american-silver-eagle_360.png',
+				markup: 1.056	
 			},
 			{
 				name: '2018 Canadian Silver Maple Leaf',
 				meta: '1 oz of Silver',
 				description: '.9999 FINE SILVER',
-				image: 'https://www.itmtrading.com/content/images/thumbs/0003731_2018-1-oz-canadian-silver-maple-leaf_360.png'
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003731_2018-1-oz-canadian-silver-maple-leaf_360.png',
+				markup: 1.056	
 			},
 			{
 				name: '2018 Austrian Silver Philharmonic',
 				meta: '1 oz of Silver',
 				description: '.9999 FINE SILVER',
-				image: 'https://www.itmtrading.com/content/images/thumbs/0003740_2018-1-oz-austrian-silver-philharmonic_360.jpeg'
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003740_2018-1-oz-austrian-silver-philharmonic_360.jpeg',
+				markup: 1.056	
 			},
 			{
 				name: 'Morgan Silver Dollar 1878-1894',
 				meta: '.7735 oz of Silver',
 				description: '90% silver 10% copper',
-				image: 'https://www.itmtrading.com/content/images/thumbs/0001043_morgan_silver_dollar_brilliant_uncirculated_360.png'
+				image: 'https://www.itmtrading.com/content/images/thumbs/0001043_morgan_silver_dollar_brilliant_uncirculated_360.png',
+				markup: 1.256	
 			}
 		] 
 	}
 
 	render() {
-		const { goldSpot, silverSpot, itemsInCart, goldSelected, percentageChange, products } = this.state;
+		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products } = this.state;
 		return(
 			<div>
 				<InfoHeader
 					goldSpot = {goldSpot}	
 					silverSpot = {silverSpot}
-					goldSelected = {goldSelected}
+					silverSelected = {silverSelected}
 					percentageChange = {percentageChange}
 					itemsInCart = {itemsInCart}
 				/>
 	    	<Container>
-	    		<MetalSelector 
-
-	    		/>
+	    		<MetalSelector />
 	    	</Container>
 				<Divider />
 				<Container>
-					<CardList 
-						products={products}
-					/>    		
-					
-									
+					<CardList
+						goldSpot = {goldSpot}	
+						silverSpot = {silverSpot}
+						silverSelected = {silverSelected} 
+						products={products}						
+					/>									
 				</Container>
 			</div>		
 		);
@@ -97,7 +104,7 @@ const InfoHeader = (props) => {
         <SpotPrice 
         	goldSpot = {props.goldSpot}
         	silverSpot = {props.silverSpot}
-        	goldSelected = {props.goldSelected}        	
+        	silverSelected = {props.silverSelected}        	
         />
       </Menu.Item>
       <Menu.Item>
@@ -118,7 +125,7 @@ const InfoHeader = (props) => {
 
 const SpotPrice = (props) => {
 	return (		
-    <p>{ props.goldSelected ? `GOLD SPOT: $${props.goldSpot}` : `SILVER SPOT: $${props.silverSpot}` }</p>  
+    <p>{ props.silverSelected ? `SILVER SPOT: $${props.silverSpot}` : `GOLD SPOT: $${props.goldSpot}` }</p>  
 	);
 }
 
@@ -146,6 +153,7 @@ const MetalSelector = (props) => {
 }
 
 const CardList = (props) => {
+	
   return (
     <Card.Group itemsPerRow={4}>
       {
@@ -156,6 +164,10 @@ const CardList = (props) => {
             name={product.name}
             meta={product.meta}            
             description={product.description}
+            markup={product.markup}
+            goldSpot={props.goldSpot}
+            silverSpot={props.silverSpot}
+            silverSelected={props.silverSelected}
           />
         ))
       }
@@ -164,6 +176,7 @@ const CardList = (props) => {
 }
 
 const MetalCard = (props) => {
+	console.log(props);
 	return (
 		<Card 
 			image={props.image}
@@ -172,7 +185,7 @@ const MetalCard = (props) => {
 			description={props.description}
 			extra={
 				<div>
-      		<h2>$1,394.64</h2>
+      		<h2>{props.silverSelected ? `$${(props.silverSpot * props.markup).toFixed(2)}` : `$${parseFloat(props.goldSpot * props.markup).toFixed(2)}`}</h2>
         	<Input 
         		fluid 
         		action={{color: 'green', content: 'Add to Cart'}} 
