@@ -1,37 +1,119 @@
 import React, { Component } from 'react';
 import { Menu, Button, Container, Icon, Input, Divider, Card, Header } from 'semantic-ui-react';
 
-const Static = () => {
-	return(
-		<div>
-			<InfoHeader />
-    	<Container>
-    		<MetalSelector />
-    	</Container>
-			<Divider />
-			<Container>    		
-				<GoldCardList />
-				<SilverCardList />				
-			</Container>
-		</div>		
-	);
+class Static extends Component {
+
+	state = {
+		goldSpot: 1334.20,
+		silverSpot: 16.57,		
+		itemsInCart: 0,
+		currentSelection: 'Gold',
+		products: [
+			{
+				name: '2018 American Eagle',
+				meta: '1 oz of Gold',
+				description: '.9167 FINE GOLD',
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003733_2018-1-oz-american-gold-eagle_360.png'
+			},
+			{
+				name: '2018 American Gold Buffalo',
+				meta: '1 oz of Gold',
+				description: '.9999 FINE GOLD',
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003799_2018-1-oz-american-gold-buffalo_360.png'
+			},
+			{
+				name: '2018 Austrian Gold Philharmonic',
+				meta: '1 oz of Gold',
+				description: '.9999 FINE GOLD',
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003737_2018-1-oz-austrian-gold-philharmonic_360.jpeg'
+			},
+			{
+				name: '2018 Great Britain Gold Brittania',
+				meta: '1 oz of Gold',
+				description: '.9999 FINE GOLD',
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003749_2018-1-oz-great-britain-gold-britannia_360.png'
+			},
+			{
+				name: '2018 American Eagle',
+				meta: '1 oz of Gold',
+				description: '.9167 FINE GOLD',
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003733_2018-1-oz-american-gold-eagle_360.png'
+			},
+			{
+				name: '2018 American Gold Buffalo',
+				meta: '1 oz of Gold',
+				description: '.9999 FINE GOLD',
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003799_2018-1-oz-american-gold-buffalo_360.png'
+			},
+			{
+				name: '2018 Austrian Gold Philharmonic',
+				meta: '1 oz of Gold',
+				description: '.9999 FINE GOLD',
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003737_2018-1-oz-austrian-gold-philharmonic_360.jpeg'
+			},
+			{
+				name: '2018 Great Britain Gold Brittania',
+				meta: '1 oz of Gold',
+				description: '.9999 FINE GOLD',
+				image: 'https://www.itmtrading.com/content/images/thumbs/0003749_2018-1-oz-great-britain-gold-britannia_360.png'
+			}
+		] 
+	}
+
+	render() {
+		const { goldSpot, silverSpot, itemsInCart, currentSelection, products } = this.state;
+		return(
+			<div>
+				<InfoHeader	/>
+	    	<Container>
+	    		<MetalSelector />
+	    	</Container>
+				<Divider />
+				<Container>
+					<CardList 
+						products={products}
+					/>    		
+					<GoldCardList />
+					<SilverCardList />				
+				</Container>
+			</div>		
+		);
+	}
 }
 
 const InfoHeader = () => {
 	return(
 		<Menu size='huge' inverted borderless>
       <Menu.Item>
-        Spot $16.49
+        <SpotPrice />
       </Menu.Item>
       <Menu.Item>
-      	Change 0.55% 
+      	<SpotChange />
       </Menu.Item>
       <Menu.Item position='right' icon='shopping cart'>        
       </Menu.Item>
       <Menu.Item>
-      	0
+      	<ItemsInCart />
       </Menu.Item>
     </Menu>
+	);
+}
+
+const SpotPrice = () => {
+	return (		
+    <p>Spot Price: Price</p>    
+	);
+}
+
+const SpotChange = () => {
+	return (
+		<p>Change: Percentage</p>
+	);
+}
+
+const ItemsInCart = () => {
+	return (
+		<p>0</p>
 	);
 }
 
@@ -40,9 +122,48 @@ const MetalSelector = () => {
 		<Container>
 			<Button.Group>
 				<Button color='yellow'>Buy Gold</Button>
-				<Button color='gray'>Buy Silver</Button>				  
+				<Button color='grey'>Buy Silver</Button>				  
 			</Button.Group>
 		</Container>
+	);
+}
+
+const CardList = (props) => {
+  return (
+    <Card.Group itemsPerRow={4}>
+      {
+        props.products.map((product, index) => (
+          <MetalCard
+            key={index}
+            image={product.image}
+            name={product.name}
+            meta={product.meta}            
+            description={product.description}
+          />
+        ))
+      }
+    </Card.Group>
+  );
+}
+
+const MetalCard = (props) => {
+	return (
+		<Card 
+			image={props.image}
+			header={props.name}
+			meta={props.meta}
+			description={props.description}
+			extra={
+				<div>
+      		<h2>$1,394.64</h2>
+        	<Input 
+        		fluid 
+        		action={{color: 'green', content: 'Add to Cart'}} 
+        		placeholder='0' 
+        	/>          	
+      	</div>
+			}
+		/>
 	);
 }
 
