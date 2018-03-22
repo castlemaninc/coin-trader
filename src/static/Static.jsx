@@ -7,7 +7,8 @@ class Static extends Component {
 		goldSpot: 1334.20,
 		silverSpot: 16.57,		
 		itemsInCart: 0,
-		currentSelection: 'Gold',
+		goldSelected: true,
+		percentageChange: 1.3,
 		products: [
 			{
 				name: '2018 American Eagle',
@@ -61,13 +62,15 @@ class Static extends Component {
 	}
 
 	render() {
-		const { goldSpot, silverSpot, itemsInCart, currentSelection, products } = this.state;
+		const { goldSpot, silverSpot, itemsInCart, goldSelected, percentageChange, products } = this.state;
 		return(
 			<div>
 				<InfoHeader
 					goldSpot = {goldSpot}	
 					silverSpot = {silverSpot}
-
+					goldSelected = {goldSelected}
+					percentageChange = {percentageChange}
+					itemsInCart = {itemsInCart}
 				/>
 	    	<Container>
 	    		<MetalSelector 
@@ -91,15 +94,23 @@ const InfoHeader = (props) => {
 	return(
 		<Menu size='huge' inverted borderless>
       <Menu.Item>
-        <SpotPrice />
+        <SpotPrice 
+        	goldSpot = {props.goldSpot}
+        	silverSpot = {props.silverSpot}
+        	goldSelected = {props.goldSelected}        	
+        />
       </Menu.Item>
       <Menu.Item>
-      	<SpotChange />
+      	<SpotChange 
+      		percentageChange = {props.percentageChange}
+      	/>
       </Menu.Item>
       <Menu.Item position='right' icon='shopping cart'>        
       </Menu.Item>
       <Menu.Item>
-      	<ItemsInCart />
+      	<ItemsInCart 
+      		itemsInCart = {props.itemsInCart}
+      	/>
       </Menu.Item>
     </Menu>
 	);
@@ -107,19 +118,19 @@ const InfoHeader = (props) => {
 
 const SpotPrice = (props) => {
 	return (		
-    <p>{props.currentSelection === 'Gold' ? `GOLD SPOT PRICE: ${props.goldSpot}` : `SILVER SPOT PRICE: ${props.silverSpot}`}</p>    
+    <p>{ props.goldSelected ? `GOLD SPOT: $${props.goldSpot}` : `SILVER SPOT: $${props.silverSpot}` }</p>  
 	);
 }
 
-const SpotChange = () => {
+const SpotChange = (props) => {
 	return (
-		<p>Change: Percentage</p>
+		<p>{`Change: ${props.percentageChange}%`} </p>
 	);
 }
 
-const ItemsInCart = () => {
+const ItemsInCart = (props) => {
 	return (
-		<p>0</p>
+		<p>{props.itemsInCart}</p>
 	);
 }
 
