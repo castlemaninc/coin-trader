@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Button, Container, Divider, Card, Header } from 'semantic-ui-react';
+import { Menu, Button, Container, Icon, Input, Divider, Card, Header } from 'semantic-ui-react';
 
 const Static = () => {
 
@@ -36,20 +36,32 @@ const Static = () => {
 						image='https://www.itmtrading.com/content/images/thumbs/0003733_2018-1-oz-american-gold-eagle_360.png'
             header='2018 American Eagle'
             meta='1 oz of Gold'
-            description='.9167 FINE GOLD' 
-            
+            description='.9167 FINE GOLD'            
             extra={
-            	<Button fluid positive>Add to Cart</Button>
-            }
+	          	<div>
+	          		<h2>$1,394.64</h2>
+		          	<Input 
+		          		fluid 
+		          		action={{color: 'green', content: 'Add to Cart'}} 
+		          		placeholder='0' 
+		          	/>          	
+	          	</div>
+	          }
 					/>
 					<Card 
 						image='https://www.itmtrading.com/content/images/thumbs/0003799_2018-1-oz-american-gold-buffalo_360.png'
 	          header='2018 American Gold Buffalo'
 	          meta='1 oz of Gold'
-	          description='.9999 FINE GOLD' 
-
+	          description='.9999 FINE GOLD'
 	          extra={
-	          	<Button fluid positive>Add to Cart</Button>
+	          	<div>
+	          		<h2>$1,394.75</h2>
+		          	<Input 
+		          		fluid 
+		          		action={{color: 'green', content: 'Add to Cart'}} 
+		          		placeholder='0' 
+		          	/>          	
+	          	</div>
 	          }
 					/>
 
@@ -58,9 +70,15 @@ const Static = () => {
 	          header='2018 Austrian Gold Philharmonic'
 	          meta='1 oz of Gold'
 	          description='.9999 FINE GOLD' 
-
 	          extra={
-	          	<Button fluid positive>Add to Cart</Button>
+	          	<div>
+	          		<h2>$1,392.81</h2>
+		          	<Input 
+		          		fluid 
+		          		action={{color: 'green', content: 'Add to Cart'}} 
+		          		placeholder='0' 
+		          	/>          	
+	          	</div>
 	          }
 					/>
 
@@ -69,9 +87,15 @@ const Static = () => {
 	          header='2018 Great Britain Gold Brittania'
 	          meta='1 oz of Gold'
 	          description='.9999 FINE GOLD' 
-
 	          extra={
-	          	<Button fluid positive>Add to Cart</Button>
+	          	<div>
+	          		<h2>$1,383.02</h2>
+		          	<Input 
+		          		fluid 
+		          		action={{color: 'green', content: 'Add to Cart'}} 
+		          		placeholder='0' 
+		          	/>          	
+	          	</div>
 	          }
 					/>
 				</Card.Group>
@@ -82,19 +106,31 @@ const Static = () => {
             header='1 oz 2018 American Eagle'
             meta='1 oz of Silver'
             description='.999 FINE SILVER' 
-            
             extra={
-            	<Button fluid positive>Add to Cart</Button>
-            }
+	          	<div>
+	          		<h2>$19.79</h2>
+		          	<Input 
+		          		fluid 
+		          		action={{color: 'green', content: 'Add to Cart'}} 
+		          		placeholder='0' 
+		          	/>          	
+	          	</div>
+	          }
 					/>
 					<Card 
 						image='https://www.itmtrading.com/content/images/thumbs/0003731_2018-1-oz-canadian-silver-maple-leaf_360.png'
 	          header='1 oz 2018 Canadian Maple Leaf'
 	          meta='1 oz of Silver'
 	          description='.9999 FINE SILVER' 
-
 	          extra={
-	          	<Button fluid positive>Add to Cart</Button>
+	          	<div>
+	          		<h2>$19.79</h2>
+		          	<Input 
+		          		fluid 
+		          		action={{color: 'green', content: 'Add to Cart'}} 
+		          		placeholder='0' 
+		          	/>          	
+	          	</div>
 	          }
 					/>
 
@@ -103,9 +139,15 @@ const Static = () => {
 	          header='1 oz 2018 Austrian Silver Philharmonic'
 	          meta='1 oz of Silver'
 	          description='.999 FINE SILVER' 
-
 	          extra={
-	          	<Button fluid positive>Add to Cart</Button>
+	          	<div>
+	          		<h2>$19.79</h2>
+		          	<Input 
+		          		fluid 
+		          		action={{color: 'green', content: 'Add to Cart'}} 
+		          		placeholder='0' 
+		          	/>          	
+	          	</div>
 	          }
 					/>
 
@@ -114,9 +156,15 @@ const Static = () => {
 	          header='Morgan Silver Dollar 1878-1894'
 	          meta='.7735 oz of Silver'
 	          description='90% silver 10% copper' 
-
 	          extra={
-	          	<Button fluid positive>Add to Cart</Button>
+	          	<div>
+	          		<h2>Call for Availability</h2>
+		          	<Input 
+		          		fluid 
+		          		action={{color: 'green', content: 'Add to Cart'}} 
+		          		placeholder='0' 
+		          	/>          	
+	          	</div>
 	          }
 					/>
 				</Card.Group>
@@ -129,21 +177,7 @@ const Static = () => {
 	);
 }
 
-const InfoHeader = () => {
-	return (
-	 <Menu size='huge' inverted borderless>
-      <Menu.Item>
-        Spot $16.49
-      </Menu.Item>
-      <Menu.Item>
-      	Change 0.55% 
-      </Menu.Item>
-      <Menu.Item position='right'>
-        Cart
-      </Menu.Item>
-    </Menu>
-	);
-}
+
 
 
 
