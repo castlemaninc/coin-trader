@@ -8,7 +8,7 @@ class Static extends Component {
 		silverSpot: 16.57,		
 		itemsInCart: 0,
 		silverSelected: false,
-		percentageChange: 1.3,
+		percentageChange: 1.34,
 		products: [
 			{
 				name: '2018 American Eagle',
@@ -62,15 +62,24 @@ class Static extends Component {
 			{
 				name: 'Morgan Silver Dollar 1878-1894',
 				meta: '.7735 oz of Silver',
-				description: '90% silver 10% copper',
+				description: '90% Silver 10% Copper',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0001043_morgan_silver_dollar_brilliant_uncirculated_360.png',
 				markup: 1.256	
 			}
 		] 
 	}
 
+	addToCart = () => {
+		console.log('addToCart');
+		this.setState((prevState) => ({
+			itemsInCart: prevState.itemsInCart + 1
+
+		}));
+	}
+
 	render() {
 		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products } = this.state;
+
 		return(
 			<div>
 				<InfoHeader
@@ -89,7 +98,8 @@ class Static extends Component {
 						goldSpot = {goldSpot}	
 						silverSpot = {silverSpot}
 						silverSelected = {silverSelected} 
-						products={products}						
+						products={products}
+						addToCart={this.addToCart}						
 					/>									
 				</Container>
 			</div>		
@@ -125,13 +135,13 @@ const InfoHeader = (props) => {
 
 const SpotPrice = (props) => {
 	return (		
-    <p>{ props.silverSelected ? `SILVER SPOT: $${props.silverSpot}` : `GOLD SPOT: $${props.goldSpot}` }</p>  
+    <p>{ props.silverSelected ? `SILVER: $${props.silverSpot.toFixed(2)}` : `GOLD: $${props.goldSpot.toFixed(2)}` }</p>  
 	);
 }
 
 const SpotChange = (props) => {
 	return (
-		<p>{`Change: ${props.percentageChange}%`} </p>
+		<p>{`Change: ${props.percentageChange.toFixed(2)}%`} </p>
 	);
 }
 
@@ -168,6 +178,7 @@ const CardList = (props) => {
             goldSpot={props.goldSpot}
             silverSpot={props.silverSpot}
             silverSelected={props.silverSelected}
+            addToCart={props.addToCart}
           />
         ))
       }
@@ -176,7 +187,7 @@ const CardList = (props) => {
 }
 
 const MetalCard = (props) => {
-	console.log(props);
+	// console.log(props);
 	return (
 		<Card 
 			image={props.image}
@@ -188,18 +199,23 @@ const MetalCard = (props) => {
       		<h2>{props.silverSelected ? `$${(props.silverSpot * props.markup).toFixed(2)}` : `$${parseFloat(props.goldSpot * props.markup).toFixed(2)}`}</h2>
         	<Input 
         		fluid 
-        		action={{color: 'green', content: 'Add to Cart'}} 
-        		placeholder='0' 
-        	/>          	
+        		action={
+        			<Button 
+        				color='green' 
+        				content='Add to Cart' 
+        				onClick={() => { 
+        					props.addToCart();
+        				}} 
+        			/> 
+        		} 
+        		placeholder='0'        		
+        		
+        	/>          	 
       	</div>
 			}
 		/>
 	);
 }
-
-
-
-
 
 export default Static; 
 
