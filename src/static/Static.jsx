@@ -77,6 +77,24 @@ class Static extends Component {
 		}));
 	}
 
+	buyGold = () => {
+		console.log('buyGold');
+		
+		this.setState(() => ({
+			silverSelected : false
+		}));
+
+	}
+
+	buySilver= () => {
+		console.log('buySilver');
+		
+		this.setState(() => ({
+			silverSelected : true
+		}));
+
+	}
+
 	render() {
 		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products } = this.state;
 
@@ -90,7 +108,10 @@ class Static extends Component {
 					itemsInCart = {itemsInCart}
 				/>
 	    	<Container>
-	    		<MetalSelector />
+	    		<MetalSelector 
+	    			buyGold={this.buyGold}
+	    			buySilver={this.buySilver}
+	    		/>
 	    	</Container>
 				<Divider />
 				<Container>
@@ -155,8 +176,18 @@ const MetalSelector = (props) => {
 	return(
 		<Container>
 			<Button.Group>
-				<Button color='yellow'>Buy Gold</Button>
-				<Button color='grey'>Buy Silver</Button>				  
+				<Button 
+					color='yellow' 
+					onClick={() => { 
+						props.buyGold(); 
+					}}>Buy Gold
+				</Button>
+				<Button 
+					color='grey' 
+					onClick={() => {
+						props.buySilver(); 
+					}}>Buy Silver
+				</Button>				  
 			</Button.Group>
 		</Container>
 	);
