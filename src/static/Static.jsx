@@ -8,7 +8,7 @@ class Static extends Component {
 		silverSpot: 16.57,
 		itemsInCart: 0,
 		percentageChange: 1.34,
-		metalType: 'gold',
+		metalType: 'gold',		
 		products : [
 			{
 				metalType: 'gold',
@@ -16,7 +16,8 @@ class Static extends Component {
 				meta: '1 oz of Gold',
 				description: '.9167 FINE GOLD',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003733_2018-1-oz-american-gold-eagle_360.png',
-				markup: 1.045
+				markup: 1.045,
+				numOfEachProduct: 0
 			},
 			{
 				metalType: 'gold',
@@ -24,7 +25,8 @@ class Static extends Component {
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003799_2018-1-oz-american-gold-buffalo_360.png',
-				markup: 1.056
+				markup: 1.056,
+				numOfEachProduct: 0
 			},
 			{
 				metalType: 'gold',
@@ -32,7 +34,8 @@ class Static extends Component {
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003737_2018-1-oz-austrian-gold-philharmonic_360.jpeg',
-				markup: 1.051
+				markup: 1.051,
+				numOfEachProduct: 0
 			},
 			{
 				metalType: 'gold',
@@ -40,7 +43,8 @@ class Static extends Component {
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003749_2018-1-oz-great-britain-gold-britannia_360.png',
-				markup: 1.047
+				markup: 1.047,
+				numOfEachProduct: 0
 			},
 			{
 				metalType: 'silver',
@@ -48,7 +52,8 @@ class Static extends Component {
 				meta: '1 oz of Silver',
 				description: '.999 FINE SILVER',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003791_2018-1-oz-american-silver-eagle_360.png',
-				markup: 1.056
+				markup: 1.056,
+				numOfEachProduct: 0
 			},
 			{
 				metalType: 'silver',
@@ -56,7 +61,8 @@ class Static extends Component {
 				meta: '1 oz of Silver',
 				description: '.9999 FINE SILVER',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003731_2018-1-oz-canadian-silver-maple-leaf_360.png',
-				markup: 1.071
+				markup: 1.071,
+				numOfEachProduct: 0
 			},
 			{
 				metalType: 'silver',
@@ -64,7 +70,8 @@ class Static extends Component {
 				meta: '1 oz of Silver',
 				description: '.9999 FINE SILVER',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003740_2018-1-oz-austrian-silver-philharmonic_360.jpeg',
-				markup: 1.042
+				markup: 1.042,
+				numOfEachProduct: 0
 			},
 			{
 				metalType: 'silver',
@@ -72,17 +79,24 @@ class Static extends Component {
 				meta: '.7735 oz of Silver',
 				description: '90% Silver 10% Copper',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0001043_morgan_silver_dollar_brilliant_uncirculated_360.png',
-				markup: 1.256
+				markup: 1.256,
+				numOfEachProduct: 0
 			}
 		]
 	}
 
 	addToCart = () => {
-		// console.log('addToCart');
+			
 		this.setState((prevState) => ({
 			itemsInCart: prevState.itemsInCart + 1
 		}));
 	}
+
+	handleChange = (event) => {
+    this.setState(() => ({
+    	numOfEachProduct: event.target.value
+    }));
+  }
 
 	setMetalType = (metalType) => {
 		// console.log('metalType', metalType);
@@ -90,16 +104,17 @@ class Static extends Component {
 	}
 
 	render() {
-		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products, metalType } = this.state;
+		const { goldSpot, silverSpot, itemsInCart, percentageChange, products, metalType } = this.state;
 
 		return(
 			<div>
 				<InfoHeader
 					goldSpot = {goldSpot}
 					silverSpot = {silverSpot}
-					silverSelected = {silverSelected}
+					// silverSelected = {silverSelected}
 					percentageChange = {percentageChange}
 					itemsInCart = {itemsInCart}
+					metalType = {metalType}
 				/>
 	    	<Container>
 	    		<MetalSelector
@@ -111,10 +126,12 @@ class Static extends Component {
 					<CardList
 						goldSpot = {goldSpot}
 						silverSpot = {silverSpot}
-						silverSelected = {silverSelected}
+						// silverSelected = {silverSelected}
 						products={products}
 						addToCart={this.addToCart}
+						handleChange={this.handleChange}
 						metalType={metalType}
+						
 					/>
 				</Container>
 			</div>
@@ -123,34 +140,37 @@ class Static extends Component {
 }
 
 const InfoHeader = (props) => {
+	// console.log(props);
 	return(
 		<Menu size='huge' inverted borderless>
-      <Menu.Item>
-        <SpotPrice
-        	goldSpot = {props.goldSpot}
-        	silverSpot = {props.silverSpot}
-        	silverSelected = {props.silverSelected}
-        />
-      </Menu.Item>
-      <Menu.Item>
-      	<SpotChange
-      		percentageChange = {props.percentageChange}
-      	/>
-      </Menu.Item>
-      <Menu.Item position='right' icon='shopping cart'>
-      </Menu.Item>
-      <Menu.Item>
-      	<ItemsInCart
-      		itemsInCart = {props.itemsInCart}
-      	/>
-      </Menu.Item>
-    </Menu>
+	      <Menu.Item>
+	        <SpotPrice
+	        	goldSpot = {props.goldSpot}
+	        	silverSpot = {props.silverSpot}
+	        	// silverSelected = {props.silverSelected}
+	        	metalType = {props.metalType}
+	        />
+	      </Menu.Item>
+	      <Menu.Item>
+	      	<SpotChange
+	      		percentageChange = {props.percentageChange}
+	      	/>
+	      </Menu.Item>
+	      <Menu.Item position='right' icon='shopping cart'>
+	      </Menu.Item>
+	      <Menu.Item>
+	      	<ItemsInCart
+	      		itemsInCart = {props.itemsInCart}
+	      	/>
+	      </Menu.Item>
+	    </Menu>
 	);
 }
 
 const SpotPrice = (props) => {
+	// console.log(props);
 	return (
-    <p>{ props.silverSelected ? `SILVER: $${props.silverSpot.toFixed(2)}` : `GOLD: $${props.goldSpot.toFixed(2)}` }</p>
+    <p>{ (props.metalType : 'silver') ? `SILVER: $${props.silverSpot.toFixed(2)}` : `GOLD: $${props.goldSpot.toFixed(2)}` }</p>
 	);
 }
 
@@ -188,7 +208,7 @@ const MetalSelector = (props) => {
 }
 
 const CardList = (props) => {
-	console.log(props)
+	// console.log(props)
 	return (
 		<Card.Group itemsPerRow={4}>
 			{
@@ -203,8 +223,11 @@ const CardList = (props) => {
 						description={product.description}
 						markup={product.markup}
 						addToCart={props.addToCart}
+						handleChange={props.handleChange}
+						numOfEachProduct={product.numOfEachProduct}
+						metalType={product.metalType}
 						goldSpot={props.goldSpot}
-						silverSpot={props.silverSpot}
+						silverSpot={props.silverSpot}						
 					/>
 				))
 			}
@@ -213,7 +236,8 @@ const CardList = (props) => {
 }
 
 const MetalCard = (props) => {
-	// console.log(props);
+	console.log(props);
+	// console.log(props.metalType);
 	return (
 		<Card
 			image={props.image}
@@ -222,21 +246,24 @@ const MetalCard = (props) => {
 			description={props.description}
 			extra={
 				<div>
-      		<h2>{props.silverSelected ? `$${(props.silverSpot * props.markup).toFixed(2)}` : `$${parseFloat(props.goldSpot * props.markup).toFixed(2)}`}</h2>
+      		<h2>{ (props.metalType === 'silver') ? `$${(props.silverSpot * props.markup).toFixed(2)}` : `$${(props.goldSpot * props.markup).toFixed(2)}`}</h2>		      		
         	<Input
-        		fluid
+        		fluid		        		
         		action={
         			<Button
         				color='green'
         				content='Add to Cart'
         				onClick={() => {
+
         					props.addToCart();
         				}}
         			/>
         		}
         		placeholder='0'
-
+        		value={props.numOfEachProduct} 
+        		onChange={props.handleChange}
         	/>
+        	
       	</div>
 			}
 		/>
