@@ -7,7 +7,6 @@ class Static extends Component {
 		goldSpot: 1334.20,
 		silverSpot: 16.57,
 		itemsInCart: 0,
-		silverSelected: false,
 		percentageChange: 1.34,
 		type: 'gold',
 		products : [
@@ -85,17 +84,10 @@ class Static extends Component {
 		}));
 	}
 
-	buyGold = () => {
-		// console.log('buyGold');
+	setMetalType = (metalType) => {
+		// console.log('metalType', metalType);
 		this.setState(() => ({
-			silverSelected : false
-		}));
-	}
-
-	buySilver= () => {
-		// console.log('buySilver');
-		this.setState(() => ({
-			silverSelected : true
+			type : metalType
 		}));
 	}
 
@@ -113,8 +105,7 @@ class Static extends Component {
 				/>
 	    	<Container>
 	    		<MetalSelector
-	    			buyGold={this.buyGold}
-	    			buySilver={this.buySilver}
+	    			setMetalType={this.setMetalType}
 	    		/>
 	    	</Container>
 				<Divider />
@@ -183,13 +174,13 @@ const MetalSelector = (props) => {
 				<Button
 					color='yellow'
 					onClick={() => {
-						props.buyGold();
+						props.setMetalType('gold');
 					}}>Buy Gold
 				</Button>
 				<Button
 					color='grey'
 					onClick={() => {
-						props.buySilver();
+						props.setMetalType('silver');
 					}}>Buy Silver
 				</Button>
 			</Button.Group>
