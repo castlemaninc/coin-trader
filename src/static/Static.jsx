@@ -9,7 +9,7 @@ class Static extends Component {
 		itemsInCart: 0,
 		silverSelected: false,
 		percentageChange: 1.34,
-		products: [
+		goldProducts : [
 			{
 				name: '2018 American Eagle',
 				meta: '1 oz of Gold',
@@ -37,7 +37,10 @@ class Static extends Component {
 				description: '.9999 FINE GOLD',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003749_2018-1-oz-great-britain-gold-britannia_360.png',
 				markup: 1.047	
-			},
+			}
+		],
+
+		silverProducts : [
 			{
 				name: '2018 American Eagle',
 				meta: '1 oz of Silver',
@@ -50,14 +53,14 @@ class Static extends Component {
 				meta: '1 oz of Silver',
 				description: '.9999 FINE SILVER',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003731_2018-1-oz-canadian-silver-maple-leaf_360.png',
-				markup: 1.056	
+				markup: 1.071	
 			},
 			{
 				name: '2018 Austrian Silver Philharmonic',
 				meta: '1 oz of Silver',
 				description: '.9999 FINE SILVER',
 				image: 'https://www.itmtrading.com/content/images/thumbs/0003740_2018-1-oz-austrian-silver-philharmonic_360.jpeg',
-				markup: 1.056	
+				markup: 1.042	
 			},
 			{
 				name: 'Morgan Silver Dollar 1878-1894',
@@ -70,33 +73,28 @@ class Static extends Component {
 	}
 
 	addToCart = () => {
-		console.log('addToCart');
+		// console.log('addToCart');
 		this.setState((prevState) => ({
 			itemsInCart: prevState.itemsInCart + 1
-
 		}));
 	}
 
 	buyGold = () => {
-		console.log('buyGold');
-		
+		// console.log('buyGold');		
 		this.setState(() => ({
 			silverSelected : false
 		}));
-
 	}
 
 	buySilver= () => {
-		console.log('buySilver');
-		
+		// console.log('buySilver');		
 		this.setState(() => ({
 			silverSelected : true
 		}));
-
 	}
 
 	render() {
-		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products } = this.state;
+		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products, goldProducts, silverProducts } = this.state;
 
 		return(
 			<div>
@@ -120,6 +118,8 @@ class Static extends Component {
 						silverSpot = {silverSpot}
 						silverSelected = {silverSelected} 
 						products={products}
+						goldProducts={goldProducts}
+						silverProducts={silverProducts}
 						addToCart={this.addToCart}						
 					/>									
 				</Container>
@@ -194,27 +194,52 @@ const MetalSelector = (props) => {
 }
 
 const CardList = (props) => {
-	
-  return (
-    <Card.Group itemsPerRow={4}>
-      {
-        props.products.map((product, index) => (
-          <MetalCard
-            key={index}
-            image={product.image}
-            name={product.name}
-            meta={product.meta}            
-            description={product.description}
-            markup={product.markup}
-            goldSpot={props.goldSpot}
-            silverSpot={props.silverSpot}
-            silverSelected={props.silverSelected}
-            addToCart={props.addToCart}
-          />
-        ))
-      }
-    </Card.Group>
-  );
+	if (!props.silverSelected) {
+		return (
+	    <Card.Group itemsPerRow={4}>
+	      {
+	        props.goldProducts.map((product, index) => (
+	          <MetalCard
+	            key={index}
+	            image={product.image}
+	            name={product.name}
+	            meta={product.meta}            
+	            description={product.description}
+	            markup={product.markup}
+	            goldSpot={props.goldSpot}
+	            // silverSpot={props.silverSpot}
+	            silverSelected={props.silverSelected}
+	            addToCart={props.addToCart}
+	          />
+	        ))
+	      }
+	    </Card.Group>
+  	);
+	}
+
+	else {
+		return (
+	    <Card.Group itemsPerRow={4}>
+	      {
+	        props.silverProducts.map((product, index) => (
+	          <MetalCard
+	            key={index}
+	            image={product.image}
+	            name={product.name}
+	            meta={product.meta}            
+	            description={product.description}
+	            markup={product.markup}
+	            // goldSpot={props.goldSpot}
+	            silverSpot={props.silverSpot}
+	            silverSelected={props.silverSelected}
+	            addToCart={props.addToCart}
+	          />
+	        ))
+	      }
+	    </Card.Group>
+  	);
+	}
+  
 }
 
 const MetalCard = (props) => {
