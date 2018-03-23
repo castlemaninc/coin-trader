@@ -8,10 +8,10 @@ class Static extends Component {
 		silverSpot: 16.57,
 		itemsInCart: 0,
 		percentageChange: 1.34,
-		type: 'gold',
+		metalType: 'gold',
 		products : [
 			{
-				type: 'gold',
+				metalType: 'gold',
 				name: '2018 American Eagle',
 				meta: '1 oz of Gold',
 				description: '.9167 FINE GOLD',
@@ -19,7 +19,7 @@ class Static extends Component {
 				markup: 1.045
 			},
 			{
-				type: 'gold',
+				metalType: 'gold',
 				name: '2018 American Gold Buffalo',
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
@@ -27,7 +27,7 @@ class Static extends Component {
 				markup: 1.056
 			},
 			{
-				type: 'gold',
+				metalType: 'gold',
 				name: '2018 Austrian Gold Philharmonic',
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
@@ -35,7 +35,7 @@ class Static extends Component {
 				markup: 1.051
 			},
 			{
-				type: 'gold',
+				metalType: 'gold',
 				name: '2018 Great Britain Gold Brittania',
 				meta: '1 oz of Gold',
 				description: '.9999 FINE GOLD',
@@ -43,7 +43,7 @@ class Static extends Component {
 				markup: 1.047
 			},
 			{
-				type: 'silver',
+				metalType: 'silver',
 				name: '2018 American Eagle',
 				meta: '1 oz of Silver',
 				description: '.999 FINE SILVER',
@@ -51,7 +51,7 @@ class Static extends Component {
 				markup: 1.056
 			},
 			{
-				type: 'silver',
+				metalType: 'silver',
 				name: '2018 Canadian Silver Maple Leaf',
 				meta: '1 oz of Silver',
 				description: '.9999 FINE SILVER',
@@ -59,7 +59,7 @@ class Static extends Component {
 				markup: 1.071
 			},
 			{
-				type: 'silver',
+				metalType: 'silver',
 				name: '2018 Austrian Silver Philharmonic',
 				meta: '1 oz of Silver',
 				description: '.9999 FINE SILVER',
@@ -67,7 +67,7 @@ class Static extends Component {
 				markup: 1.042
 			},
 			{
-				type: 'silver',
+				metalType: 'silver',
 				name: 'Morgan Silver Dollar 1878-1894',
 				meta: '.7735 oz of Silver',
 				description: '90% Silver 10% Copper',
@@ -86,13 +86,11 @@ class Static extends Component {
 
 	setMetalType = (metalType) => {
 		// console.log('metalType', metalType);
-		this.setState(() => ({
-			type : metalType
-		}));
+		this.setState(() => ({ metalType: metalType }));
 	}
 
 	render() {
-		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products, goldProducts, silverProducts } = this.state;
+		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products, goldProducts, silverProducts, metalType } = this.state;
 
 		return(
 			<div>
@@ -116,6 +114,7 @@ class Static extends Component {
 						silverSelected = {silverSelected}
 						products={products}
 						addToCart={this.addToCart}
+						metalType={metalType}
 					/>
 				</Container>
 			</div>
@@ -192,7 +191,9 @@ const CardList = (props) => {
 	return (
 		<Card.Group itemsPerRow={4}>
 			{
-				props.products.map((product, index) => (
+				props.products
+				.filter(product => product.metalType === props.metalType)
+				.map((product, index) => (
 					<MetalCard
 						key={index}
 						image={product.image}
