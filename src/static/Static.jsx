@@ -90,7 +90,7 @@ class Static extends Component {
 	}
 
 	render() {
-		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products, goldProducts, silverProducts, metalType } = this.state;
+		const { goldSpot, silverSpot, itemsInCart, silverSelected, percentageChange, products, metalType } = this.state;
 
 		return(
 			<div>
@@ -188,6 +188,7 @@ const MetalSelector = (props) => {
 }
 
 const CardList = (props) => {
+	console.log(props)
 	return (
 		<Card.Group itemsPerRow={4}>
 			{
@@ -202,6 +203,8 @@ const CardList = (props) => {
 						description={product.description}
 						markup={product.markup}
 						addToCart={props.addToCart}
+						goldSpot={props.goldSpot}
+						silverSpot={props.silverSpot}
 					/>
 				))
 			}
