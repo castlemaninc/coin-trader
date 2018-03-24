@@ -86,7 +86,7 @@ class Static extends Component {
 	}
 
 	addToCart = () => {
-			
+
 		this.setState((prevState) => ({
 			itemsInCart: prevState.itemsInCart + 1
 		}));
@@ -170,7 +170,7 @@ const InfoHeader = (props) => {
 const SpotPrice = (props) => {
 	// console.log(props);
 	return (
-    <p>{ (props.metalType : 'silver') ? `SILVER: $${props.silverSpot.toFixed(2)}` : `GOLD: $${props.goldSpot.toFixed(2)}` }</p>
+    <p>{ (props.metalType === 'silver') ? `SILVER: $${props.silverSpot.toFixed(2)}` : `GOLD: $${props.goldSpot.toFixed(2)}` }</p>
 	);
 }
 
